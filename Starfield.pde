@@ -1,9 +1,9 @@
-static final int OBJECT_COUNT = 200;
+static final int OBJECT_COUNT = 500;
 Spreadable[] galacticObject = new Spreadable[OBJECT_COUNT];
 int obCount = 0;
 
 void setup(){
-	size(500,500);
+	size(800,800);
 	background(0);
 }
 
@@ -20,10 +20,10 @@ class Asteroid implements Spreadable{
 	int ySpeed;
 	float theSize;
 	Asteroid(){
-		x  = (float) (Math.random()*30 + 235);
-		y = (float) (Math.random()*30 + 235);
-		xSpeed = (int) (Math.random()*7-3);
-		ySpeed = (int) (Math.random()*7-3);
+		x  = (float) (Math.random()*30 + 385);
+		y = (float) (Math.random()*30 + 385);
+		xSpeed = (int) (Math.random()*11-5);
+		ySpeed = (int) (Math.random()*11-5);
 		theSize = (float) (Math.random()*50 + 20);
 	}
 	void move(){
@@ -33,6 +33,7 @@ class Asteroid implements Spreadable{
 			move();
 			return;	
 		}
+		theSize+=.1;
 		x+=xSpeed;
 		y+=ySpeed;
 	}
@@ -52,12 +53,14 @@ class Star implements Spreadable{
 	int xSpeed;
 	int ySpeed;
 	float theSize;
+	float swerve;
 	Star(){
-		x  = (float) (Math.random()*30 + 235);
-		y = (float) (Math.random()*30 + 235);
+		x  = (float) (Math.random()*30 + 385);
+		y = (float) (Math.random()*30 + 385);
 		xSpeed = (int) (Math.random()*9-4);
 		ySpeed = (int) (Math.random()*9-4);
 		theSize = (float) (Math.random()*10 + 5);
+		swerve = 0;
 	}
 	void move(){
 		if(xSpeed == 0 && ySpeed == 0){
@@ -66,8 +69,10 @@ class Star implements Spreadable{
 			move();
 			return;	
 		}
-		x+=xSpeed;
-		y+=ySpeed;
+		x+=xSpeed + 2*Math.sin(swerve);
+		y+=ySpeed + 2*Math.sin(swerve);
+		theSize+=.1;
+		swerve+=.1;
 	}
 	void create(){
 		fill(255, 243, 61);
@@ -85,22 +90,25 @@ class Comet implements Spreadable{
 	int xSpeed;
 	int ySpeed;
 	float theSize;
+	float swerve;
 	Comet(){
-		x  = (float) (Math.random()*30 + 235);
-		y = (float) (Math.random()*30 + 235);
+		x  = (float) (Math.random()*30 + 385);
+		y = (float) (Math.random()*30 + 385);
 		xSpeed = (int) (Math.random()*15-7);
 		ySpeed = (int) (Math.random()*15-7);
 		theSize = (float) (Math.random()*10 + 5);
 	}
 	void move(){
 		if(xSpeed == 0 && ySpeed == 0){
-			xSpeed = (int) (Math.random()*13-6);
-			ySpeed = (int) (Math.random()*13-6);
+			xSpeed = (int) (Math.random()*5-2);
+			ySpeed = (int) (Math.random()*5-2);
 			move();
 			return;	
 		}
-		x+=xSpeed;
-		y+=ySpeed;
+		x+=xSpeed + Math.tan(swerve);
+		y+=ySpeed + Math.tan(swerve);
+		theSize+=.1;
+		swerve+=.1;
 	}
 	void create(){
 		fill((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256));
@@ -116,7 +124,7 @@ void draw(){
 	rectMode(CENTER);
 	int randomNum = (int) (Math.random() * 10);
 	fill(0,0,0,10);
-	rect(250,250,800,800);
+	rect(250,250,8000,8000);
 	if(obCount >= galacticObject.length){
 		obCount = 0;
 	}
