@@ -158,12 +158,12 @@ class Oddball implements Spreadable{
 			changeSize*=-1;
 		}
 		theSize+=changeSize;
+		translate(width/2, height/2);
+		rotate(rotation+=.01f);
 
 	}
 	public void create(){
 		fill((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256));
-		translate(width/2, height/2);
-		rotate(rotation+=.01f);
 		rect(x,y,theSize,theSize);
 	}
 	public void run(){
@@ -191,12 +191,15 @@ public void draw(){
 	}
 	obCount++;
 	if(galacticObject[galacticObject.length-1]!=null){
-		galacticObject[galacticObject.length-1].run();
+		galacticObject[galacticObject.length-1].move();
 	}
 	for(int i = 0; i<galacticObject.length-1; i++){
 		if(galacticObject[i]!=null){
 			galacticObject[i].run();
 		}
+	}
+	if(galacticObject[galacticObject.length-1]!=null){
+		galacticObject[galacticObject.length-1].create();
 	}
 }
   static public void main(String[] passedArgs) {
