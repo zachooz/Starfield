@@ -5,7 +5,7 @@ int obCount = 0;
 void setup(){
 	size(800,800);
 	background(0);
-	galacticObject[galacticObject.length-1] = new Weirdo();
+	galacticObject[galacticObject.length-1] = new Oddball();
 }
 
 interface Spreadable{
@@ -121,13 +121,13 @@ class Comet implements Spreadable{
 	}
 }
 
-class Weirdo implements Spreadable{
+class Oddball implements Spreadable{
 	float x;
 	float y;
 	float rotation;
 	float theSize;
 	float changeSize;
-	Weirdo(){
+	Oddball(){
 		x=200;
 		y=200;
 		rotation=0;
