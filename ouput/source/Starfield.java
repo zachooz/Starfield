@@ -22,6 +22,7 @@ public void setup(){
 	size(800,800);
 	background(0);
 	galacticObject[galacticObject.length-1] = new Oddball();
+	noStroke();
 }
 
 interface Spreadable{
@@ -56,7 +57,7 @@ class Asteroid implements Spreadable{
 	}
 	public void create(){
 		fill(100, 100, 100);
-		rect(x,y,theSize,theSize);
+		ellipse(x,y,theSize,theSize);
 	}
 	public void run(){
 		create();
@@ -93,7 +94,7 @@ class Star implements Spreadable{
 	}
 	public void create(){
 		fill(255, 243, 61);
-		rect(x,y,theSize,theSize);
+		ellipse(x,y,theSize,theSize);
 	}
 	public void run(){
 		create();
@@ -129,7 +130,7 @@ class Comet implements Spreadable{
 	}
 	public void create(){
 		fill((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256));
-		rect(x,y,theSize,theSize);
+		ellipse(x,y,theSize,theSize);
 	}
 	public void run(){
 		create();
@@ -163,8 +164,8 @@ class Oddball implements Spreadable{
 
 	}
 	public void create(){
-		fill((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256));
-		rect(x,y,theSize,theSize);
+		fill(0,255,0);
+		ellipse(x, y, theSize, theSize);
 	}
 	public void run(){
 		move();
