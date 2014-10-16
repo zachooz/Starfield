@@ -5,6 +5,7 @@ int obCount = 0;
 void setup(){
 	size(800,800);
 	background(0);
+	galacticObject[galacticObject.length-1] = new Weirdo();
 }
 
 interface Spreadable{
@@ -120,12 +121,49 @@ class Comet implements Spreadable{
 	}
 }
 
+class Weirdo implements Spreadable{
+	float x;
+	float y;
+	float rotation;
+	float theSize;
+	float changeSize;
+	Weirdo(){
+		x=200;
+		y=200;
+		rotation=0;
+		theSize=0;
+		changeSize = .5;
+	}
+	void move(){
+		if(theSize>width/2){
+			changeSize*=-1;
+		}
+		if(theSize<0){
+			changeSize*=-1;
+		}
+		theSize+=changeSize;
+
+	}
+	void create(){
+		fill((int) (Math.random() * 256), (int) (Math.random() * 256), (int) (Math.random() * 256));
+		translate(width/2, height/2);
+		rotate(rotation+=.01);
+		rect(x,y,theSize,theSize);
+	}
+	void run(){
+		move();
+		create();
+	}
+}
+
+
+
 void draw(){
 	rectMode(CENTER);
 	int randomNum = (int) (Math.random() * 10);
 	fill(0,0,0,10);
 	rect(250,250,8000,8000);
-	if(obCount >= galacticObject.length){
+	if(obCount >= galacticObject.length-1){
 		obCount = 0;
 	}
 	if(randomNum <=2){
@@ -136,8 +174,10 @@ void draw(){
 		galacticObject[obCount] = new Asteroid();
 	}
 	obCount++;
-
-	for(int i = 0; i<galacticObject.length; i++){
+	if(galacticObject[galacticObject.length-1]!=null){
+		galacticObject[galacticObject.length-1].run();
+	}
+	for(int i = 0; i<galacticObject.length-1; i++){
 		if(galacticObject[i]!=null){
 			galacticObject[i].run();
 		}
