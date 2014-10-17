@@ -136,7 +136,7 @@ class Oddball implements Spreadable{
 		changeSize = .5;
 	}
 	void move(){
-		if(theSize>300){
+		if(theSize>200){
 			changeSize*=-1;
 		}
 		if(theSize<0){
