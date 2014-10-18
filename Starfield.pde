@@ -1,11 +1,12 @@
 static final int OBJECT_COUNT = 500;
 Spreadable[] galacticObject = new Spreadable[OBJECT_COUNT];
 int obCount = 0;
-
+BigStar theMegaStar;
 void setup(){
 	size(800,800);
 	background(0);
 	galacticObject[galacticObject.length-1] = new Oddball();
+	theMegaStar = new BigStar();
 	noStroke();
 }
 
@@ -83,6 +84,17 @@ class Star implements Spreadable{
 	void run(){
 		create();
 		move();
+	}
+}
+
+class BigStar extends Star {
+	BigStar(){
+		x  = 200.0;
+		y = 450.0;
+		xSpeed = -3;
+		ySpeed = -3;
+		theSize = 55;
+		swerve = 0;
 	}
 }
 
@@ -183,6 +195,7 @@ void draw(){
 			galacticObject[i].run();
 		}
 	}
+	theMegaStar.run();
 	if(galacticObject[galacticObject.length-1]!=null){
 		galacticObject[galacticObject.length-1].create();
 	}
